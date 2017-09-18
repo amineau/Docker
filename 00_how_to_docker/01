@@ -1,1 +1,1 @@
-docker-machine create -d virtualbox Char
+docker-machine -s "/Users/amineau/goinfre/.docker/machine" create -d virtualbox Char
