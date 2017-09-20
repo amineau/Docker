@@ -1,5 +1,7 @@
 FROM alpine:latest
 
-RUN apk add --update vim
+RUN apk update \
+	&& apk add vim \
+	&& rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["vim"]
