@@ -1,0 +1,2 @@
+docker build . -t amineau/vim
+docker run --name vim amineau/vim

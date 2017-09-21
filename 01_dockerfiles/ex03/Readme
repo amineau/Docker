@@ -1,0 +1,2 @@
+docker build . -t amineau/gogs
+docker run --name gogs -p 10022:22 -p 3000:3000 amineau/gogs
