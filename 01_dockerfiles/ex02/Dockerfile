@@ -1,15 +1,17 @@
-FROM ruby:latest
+FROM ruby
 
-ENV APP ex02
 ENV TARGET /opt/app
 
-RUN gem install rails \
-	&& rails new $APP
+RUN apt-get update \
+	&& apt-get install -y nodejs \
+	&& gem install rails
 
-WORKDIR /$APP
+ONBUILD COPY app/ $TARGET
 
-RUN sed -i "s/# gem 'therubyracer'/gem 'therubyracer'/g" Gemfile \
-	&& bundle install
-	 
-RUN mkdir -p $TARGET \
-	&& cp -r /$APP $TARGET
+ONBUILD WORKDIR $TARGET
+
+ONBUILD RUN bundle install \
+	&& rails db:migrate \
+	&& rails db:setup
+
+ONBUILD EXPOSE 3000

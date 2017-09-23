@@ -1,5 +1,5 @@
 docker build . -t  ft-rails:5.0.2-on-build
-mkdir parent && echo "FROM ft-rails:5.0.2-on-build\nCMD ['rails', 's', '-b', '0.0.0.0']" >> parent/Dockerfile
+mkdir parent && rails new parent/app
+echo "FROM ft-rails:5.0.2-on-build\nCMD rails s -b 0.0.0.0" >> parent/Dockerfile
 docker build parent -t amineau/rails
-rm -rf parent
 docker run --name rails -p 8080:3000 amineau/rails
